@@ -1,0 +1,87 @@
+body {
+  background-color: white;
+  color: black;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h4 {
+  background-color: #e0e0e0;
+  padding: 8px;
+  border-bottom: 2px solid gray;
+}
+
+h4 a {
+  margin: 0 8px;
+  padding: 4px 8px;
+  text-decoration: none;
+  color: black;
+  background-color: #dcdcdc;
+  border: 1px solid gray;
+}
+
+h4 a:hover {
+  background-color: #c0c0c0;
+  border-color: black;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid gray;
+  margin: 10px 0;
+}
+
+.container {
+  width: 400px;
+  margin: 40px auto;
+  padding: 15px;
+  border: 2px solid gray;
+  background-color: #f5f5f5;
+}
+
+h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 90%;
+  padding: 6px;
+  margin: 6px 0;
+  border: 1px solid gray;
+  background-color: white;
+}
+
+input[type="submit"] {
+  background-color: #e0e0e0;
+  border: 1px solid gray;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+input[type="submit"]:hover {
+  background-color: #c0c0c0;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-top: 2px solid gray;
+  padding: 4px;
+}
+
+.login-link {
+  display: block;
+  margin-top: 12px;
+  text-decoration: none;
+  color: blue;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
