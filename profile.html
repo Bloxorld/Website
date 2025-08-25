@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloxorld</title>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+    <a href="index.html"> <img src="https://i.ibb.co/P7DmBvt/logo.png" width="450" height="150" alt="Bloxorld Logo"> </a>
+    <h4>
+      <a href="Games.html" id="GamesButton">Games</a>
+      <a href="newaccount.html" id="SigninButton">Sign Up</a>
+      <a href="login.html" id="LoginButton">Login</a>
+    </h4>
+    <hr>
+    <h2 id="username">?</h2>
+    <p id="admin?">?</p>
+    <hr>
+    <p id="desc">?</p>
+    <p id="status">?</p>
+    <footer>
+        <p id="joined">?</p>
+        <br>
+        <p id="lastseen">?</p>
+      <hr>
+      <p>© 2025 Bloxorld</p>
+      <a href="jobs.html">Jobs</a>
+    </footer>
+  </body>
+</html>
+
+<script>
+async function checkLogin() {
+    const res = await fetch("isloggedin.php");
+    const data = await res.json();
+
+    const SigninBtn  = document.getElementById("SigninButton");
+    const LoginBtn  = document.getElementById("LoginButton");
+
+    if (data.loggedIn) {
+        SigninBtn.remove();
+        LoginBtn.remove();
+    }
+}
+
+checkLogin();
+
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('user');
+
+async function fetchUser(userId) {
+    try {
+        const response = await fetch(`getuser.php?user=${userId}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const userData = await response.json();
+        if (userData.profile) {
+            displayUser(userData.profile);
+        } else {
+            console.error('Error:', userData.error);
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+}
+
+async function fetchUserProfile(userId) {
+    try {
+        const response = await fetch(`getprofile.php?user=${userId}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const userData = await response.json();
+        if (userData.profile) {
+            displayProfile(userData.profile);
+        } else {
+            console.error('Error:', userData.error);
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+}
+
+function displayProfile(user) {
+    document.getElementById('lastseen').textContent = "Last seen: " + user.LastSeen;
+    document.getElementById('desc').textContent = user.Description;
+    if(!user.Status) {
+        document.getElementById('status').textContent = "Feeling: Neutral";
+    } else {
+        document.getElementById('status').textContent = "Feeling: " + user.Status;
+    }
+
+    if(user.Online) {
+    //    document.getElementById("username").style.color = "green";
+    } else {
+    //    document.getElementById("username").style.color = "red";
+    }
+}
+
+function displayUser(user) {
+    document.getElementById('username').textContent = user.username;
+    document.getElementById('admin?').textContent = user.admin ? 'Admin' : 'User';
+    document.getElementById('joined').textContent = "Joined at: " + user.created_at;
+}
+
+if (id) {
+    fetchUser(id);
+    fetchUserProfile(id);
+} else {
+    console.error('No user ID provided in URL');
+}
+</script>
